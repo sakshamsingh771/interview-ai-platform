@@ -1,0 +1,29 @@
+# --- Web framework ---
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9        # required by FastAPI to parse OAuth2PasswordRequestForm
+
+# --- Database / ORM ---
+sqlalchemy==2.0.35
+asyncpg==0.29.0                 # async Postgres driver (used by database.py's async engine)
+psycopg2-binary==2.9.9          # sync Postgres driver (used by Alembic migrations)
+alembic==1.13.2
+
+# --- Validation / settings ---
+pydantic==2.9.2
+pydantic-settings==2.5.2
+email-validator==2.2.0          # required by pydantic's EmailStr
+python-dotenv==1.0.1
+
+# --- Auth ---
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1                   # pinned: passlib 1.7.4 breaks on bcrypt>=4.1
+slowapi==0.1.9                  # rate limiting
+google-auth==2.34.0              # verifies Google Sign-In ID tokens
+httpx==0.27.2                     # GitHub OAuth code-exchange + user API calls
+
+# --- AI ---
+anthropic==0.34.2
+openai==1.51.0
+requests==2.32.3

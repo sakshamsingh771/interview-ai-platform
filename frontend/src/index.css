@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Color tokens as "R G B" triples (no rgb() wrapper - Tailwind's
+  rgb(var(--x) / <alpha-value>) needs the bare channel values).
+  .dark is PrepRoom's original studio look; .light is a paper-toned
+  equivalent with the same accent hues so the brand still reads as itself.
+*/
+.dark {
+  --color-ink: 18 24 31;
+  --color-surface: 27 34 44;
+  --color-surface-light: 35 44 56;
+  --color-border: 44 54 68;
+  --color-gold: 201 162 39;
+  --color-gold-soft: 228 197 103;
+  --color-teal: 79 209 197;
+  --color-danger: 229 72 77;
+  --color-paper: 242 240 234;
+  --color-muted: 139 147 161;
+}
+
+.light {
+  --color-ink: 246 244 239;
+  --color-surface: 255 255 255;
+  --color-surface-light: 249 247 242;
+  --color-border: 224 220 210;
+  --color-gold: 178 138 26;
+  --color-gold-soft: 143 108 16;
+  --color-teal: 15 143 133;
+  --color-danger: 200 45 50;
+  --color-paper: 24 28 34;
+  --color-muted: 100 105 115;
+}
+
+@layer base {
+  html {
+    transition: background-color 0.3s ease;
+    overflow-x: hidden;
+  }
+  body {
+    @apply bg-ink text-paper font-body antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+  ::selection {
+    @apply bg-gold/30 text-paper;
+  }
+  *:focus-visible {
+    outline: 2px solid rgb(var(--color-gold));
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-gold px-4 py-2.5
+           font-body font-medium text-ink transition hover:bg-goldSoft
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-border
+           bg-surface px-4 py-2.5 font-body font-medium text-paper transition
+           hover:border-gold/50 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .input-field {
+    @apply w-full rounded-md border border-border bg-surface px-3.5 py-2.5 text-paper
+           placeholder:text-muted focus:border-gold focus:outline-none transition;
+  }
+  .card {
+    @apply rounded-xl border border-border bg-surface p-6 transition-colors duration-300;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-muted;
+  }
+}
+
+@layer utilities {
+  /* Soft, slow-drifting gradient blobs used behind the landing-page hero.
+     Pure CSS - no JS, no images, cheap to render, respects reduced motion. */
+  .bg-blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(70px);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-blobFloat {
+      animation: none;
+    }
+  }
+}
