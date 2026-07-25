@@ -80,7 +80,7 @@ export default function Signup() {
               type="text"
               autoComplete="name"
               className={`input-field ${fieldErrors.fullName ? "border-danger focus:border-danger" : ""}`}
-              placeholder="Saksham Sharma"
+              placeholder="Saksham Singh"
               value={fullName}
               onChange={(e) => {
                 setFullName(e.target.value);
